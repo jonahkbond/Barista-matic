@@ -1,9 +1,10 @@
 package com.trustwave;
 
-import com.trustwave.drink.Drink;
+import com.trustwave.drink.*;
 import com.trustwave.ingredient.Ingredient;
 import com.trustwave.inventory.Inventory;
 import com.trustwave.menu.Menu;
+import com.trustwave.recipe.*;
 import java.io.*;
 import java.util.*;
 
@@ -36,47 +37,21 @@ public class Baristamatic {
         ingredientsMap.put(cocoaIngredient.getName(), cocoaIngredient);
         ingredientsMap.put(whippedCreamIngredient.getName(), whippedCreamIngredient);
 
-        //Create Coffee Recipe
-        Map<String, Integer> coffeeRecipeMap = new HashMap<>();
-        coffeeRecipeMap.put(coffeeIngredent.getName(), 3);
-        coffeeRecipeMap.put(sugarIngredient.getName(), 1);
-        coffeeRecipeMap.put(creamIngredient.getName(), 1);
-
-        //Create Decaf Coffee Recipe
-        Map<String, Integer> decafCoffeeRecipeMap = new HashMap<>();
-        decafCoffeeRecipeMap.put(decafCoffeeIngredent.getName(), 3);
-        decafCoffeeRecipeMap.put(sugarIngredient.getName(), 1);
-        decafCoffeeRecipeMap.put(creamIngredient.getName(), 1);
-
-        //Create Cafe Latte Recipe
-        Map<String, Integer> cafeLatteRecipeMap = new HashMap<>();
-        cafeLatteRecipeMap.put(espressoIngredient.getName(), 2);
-        cafeLatteRecipeMap.put(steamedMilkIngredient.getName(), 1);
-
-        //Create Cafe Americano Recipe
-        Map<String, Integer> cafeAmericanoRecipeMap = new HashMap<>();
-        cafeAmericanoRecipeMap.put(espressoIngredient.getName(), 3);
-
-        //Create Cafe Mocha Recipe
-        Map<String, Integer> cafeMochaRecipeMap = new HashMap<>();
-        cafeMochaRecipeMap.put(espressoIngredient.getName(), 1);
-        cafeMochaRecipeMap.put(cocoaIngredient.getName(), 1);
-        cafeMochaRecipeMap.put(steamedMilkIngredient.getName(), 1);
-        cafeMochaRecipeMap.put(whippedCreamIngredient.getName(), 1);
-
-        //Create Cappuccino Recipe
-        Map<String, Integer> cappuccinoRecipeMap = new HashMap<>();
-        cappuccinoRecipeMap.put(espressoIngredient.getName(), 2);
-        cappuccinoRecipeMap.put(steamedMilkIngredient.getName(), 1);
-        cappuccinoRecipeMap.put(foamedMilkIngredient.getName(), 1);
+        //Create Recipes
+        CoffeeRecipe coffeeRecipe = new CoffeeRecipe();
+        DecafCoffeeRecipe decafCoffeeRecipe = new DecafCoffeeRecipe();
+        CaffeLatteRecipe caffeLatteRecipe = new CaffeLatteRecipe();
+        CaffeAmericanoRecipe caffeAmericanoRecipe = new CaffeAmericanoRecipe();
+        CaffeMochaRecipe caffeMochaRecipe = new CaffeMochaRecipe();
+        CappuccinoRecipe cappuccinoRecipe = new CappuccinoRecipe();
 
         //Create Drinks
-        Drink coffee = new Drink("Coffee", ingredientsMap, coffeeRecipeMap);
-        Drink decafCoffee = new Drink("Decaf Coffee", ingredientsMap, decafCoffeeRecipeMap);
-        Drink cafeLatte = new Drink("Cafe Latte", ingredientsMap, cafeLatteRecipeMap);
-        Drink cafeAmericano = new Drink("Cafe Americano", ingredientsMap, cafeAmericanoRecipeMap);
-        Drink cafeMocha = new Drink("Cafe Mocha", ingredientsMap, cafeMochaRecipeMap);
-        Drink cappuccino = new Drink("Cappuccino", ingredientsMap, cappuccinoRecipeMap);
+        Drink coffee = new Drink("Coffee", ingredientsMap, coffeeRecipe.getRecipe());
+        Drink decafCoffee = new Drink("Decaf Coffee", ingredientsMap, decafCoffeeRecipe.getRecipe());
+        Drink caffeLatte = new Drink("Caffe Latte", ingredientsMap, caffeLatteRecipe.getRecipe());
+        Drink caffeAmericano = new Drink("Caffe Americano", ingredientsMap, caffeAmericanoRecipe.getRecipe());
+        Drink caffeMocha = new Drink("Caffe Mocha", ingredientsMap, caffeMochaRecipe.getRecipe());
+        Drink cappuccino = new Drink("Cappuccino", ingredientsMap, cappuccinoRecipe.getRecipe());
 
         //Create Inventory
         Map<String, Integer> stockMap = new TreeMap<>();
@@ -87,15 +62,18 @@ public class Baristamatic {
 
         //Create drinkMap and add Drinks
         Map<Integer, Drink> drinkMap = new TreeMap<>();
-        drinkMap.put(1, cafeAmericano);
-        drinkMap.put(2, cafeLatte);
-        drinkMap.put(3, cafeMocha);
+        drinkMap.put(1, caffeAmericano);
+        drinkMap.put(2, caffeLatte);
+        drinkMap.put(3, caffeMocha);
         drinkMap.put(4, cappuccino);
         drinkMap.put(5, coffee);
         drinkMap.put(6, decafCoffee);
 
         //Create menu
         Menu menu = new Menu(drinkMap,inventory);
+
+        //Create DrinkManager
+        DrinkManager drinkManger = new DrinkManager();
 
         while(quit!=true){
             inventory.display();
@@ -120,65 +98,57 @@ public class Baristamatic {
                     inventory.restock();
                     break;
                 case "1":
-                    if(menu.isAvailable(cafeAmericano)){
-                        inventory.decreaseIngredientUnitsByDrink(cafeAmericano);
-                        dispensing(cafeAmericano);
+                    if(menu.isAvailable(caffeAmericano)){
+                        inventory.decreaseIngredientUnitsByDrink(caffeAmericano);
+                        drinkManger.dispensing(caffeAmericano);
                         break;
                     }
-                    else outOfStock(cafeAmericano);
+                    else drinkManger.outOfStock(caffeAmericano);
                     break;
                 case "2":
-                    if(menu.isAvailable(cafeLatte)){
-                        inventory.decreaseIngredientUnitsByDrink(cafeLatte);
-                        dispensing(cafeLatte);
+                    if(menu.isAvailable(caffeLatte)){
+                        inventory.decreaseIngredientUnitsByDrink(caffeLatte);
+                        drinkManger.dispensing(caffeLatte);
                         break;
                     }
-                    else outOfStock(cafeLatte);
+                    else drinkManger.outOfStock(caffeLatte);
                     break;
                 case "3":
-                    if(menu.isAvailable(cafeMocha)){
-                        inventory.decreaseIngredientUnitsByDrink(cafeMocha);
-                        dispensing(cafeMocha);
+                    if(menu.isAvailable(caffeMocha)){
+                        inventory.decreaseIngredientUnitsByDrink(caffeMocha);
+                        drinkManger.dispensing(caffeMocha);
                         break;
                     }
-                    else outOfStock(cafeMocha);
+                    else drinkManger.outOfStock(caffeMocha);
                     break;
                 case "4":
                     if(menu.isAvailable(cappuccino)){
                         inventory.decreaseIngredientUnitsByDrink(cappuccino);
-                        dispensing(cappuccino);
+                        drinkManger.dispensing(cappuccino);
                         break;
                     }
-                    else outOfStock(cappuccino);
+                    else drinkManger.outOfStock(cappuccino);
                     break;
                 case "5":
                     if(menu.isAvailable(coffee)){
                         inventory.decreaseIngredientUnitsByDrink(coffee);
-                        dispensing(coffee);
+                        drinkManger.dispensing(coffee);
                         break;
                     }
-                    else outOfStock(coffee);
+                    else drinkManger.outOfStock(coffee);
                     break;
                 case "6":
                     if(menu.isAvailable(decafCoffee)){
                         inventory.decreaseIngredientUnitsByDrink(decafCoffee);
-                        dispensing(decafCoffee);
+                        drinkManger.dispensing(decafCoffee);
                         break;
                     }
-                    else outOfStock(decafCoffee);
+                    else drinkManger.outOfStock(decafCoffee);
                     break;
                 default:
                     System.out.println("Invalid selection: " + input);
                     break;
             }
         }
-    }
-
-    public static void dispensing(Drink drink){
-        System.out.println("Dispensing: " + drink.getName());
-    }
-
-    public static void outOfStock(Drink drink){
-        System.out.println("Out of stock: " + drink.getName());
     }
 }
