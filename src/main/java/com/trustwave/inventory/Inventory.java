@@ -1,7 +1,7 @@
 package com.trustwave.inventory;
 
+import com.trustwave.drink.Drink;
 import com.trustwave.ingredient.Ingredient;
-
 import java.util.Map;
 
 public class Inventory {
@@ -25,6 +25,12 @@ public class Inventory {
 
     public void decreaseIngredientUnits(Ingredient ingredient, int units){
         this.inventoryMap.replace(ingredient.getName(), this.inventoryMap.get(ingredient.getName())-units);
+    }
+
+    public void decreaseIngredientUnitsByDrink(Drink drink){
+        for (Map.Entry<String, Integer> entry : drink.getRecipe().entrySet()){
+            this.inventoryMap.replace(entry.getKey(), this.inventoryMap.get(entry.getKey()) - entry.getValue());
+        }
     }
 
     public void restock(){

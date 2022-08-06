@@ -4,12 +4,8 @@ import com.trustwave.drink.Drink;
 import com.trustwave.ingredient.Ingredient;
 import com.trustwave.inventory.Inventory;
 import com.trustwave.menu.Menu;
-
 import java.io.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Baristamatic {
     public static void main(String[] args) {
@@ -28,7 +24,7 @@ public class Baristamatic {
         Ingredient cocoaIngredient = new Ingredient("Cocoa", 0.90);
         Ingredient whippedCreamIngredient = new Ingredient("Whipped Cream", 1.00);
 
-        //Create ingredients map
+        //Create ingredients map and add Ingredients
         Map<String, Ingredient> ingredientsMap = new HashMap<>();
         ingredientsMap.put(coffeeIngredent.getName(), coffeeIngredent);
         ingredientsMap.put(decafCoffeeIngredent.getName(), decafCoffeeIngredent);
@@ -83,15 +79,14 @@ public class Baristamatic {
         Drink cappuccino = new Drink("Cappuccino", ingredientsMap, cappuccinoRecipeMap);
 
         //Create Inventory
-        Map<String, Integer> stockMap = new HashMap<>();
+        Map<String, Integer> stockMap = new TreeMap<>();
         for (Map.Entry<String, Ingredient> entry : ingredientsMap.entrySet()) {
-            //entry.setValue(10);
             stockMap.put(entry.getKey(), 10);
         }
         Inventory inventory = new Inventory(stockMap);
 
-        //Add drinks to drinkMap
-        Map<Integer, Drink> drinkMap = new HashMap<>();
+        //Create drinkMap and add Drinks
+        Map<Integer, Drink> drinkMap = new TreeMap<>();
         drinkMap.put(1, cafeAmericano);
         drinkMap.put(2, cafeLatte);
         drinkMap.put(3, cafeMocha);
@@ -104,6 +99,9 @@ public class Baristamatic {
 
         while(quit!=true){
             inventory.display();
+            menu.display();
+            input = "";
+
             while(input.isEmpty()){
                 try {
                     input = br.readLine();
@@ -114,45 +112,73 @@ public class Baristamatic {
             }
 
             input = input.toLowerCase();
-            System.out.println("You entered: " + input);
             switch(input){
                 case "q":
                     quit = true;
                     break;
                 case "r":
-                    System.out.println("Restock inventory");
-                    input = "";
+                    inventory.restock();
                     break;
                 case "1":
-                    System.out.println("Dispensing Coffee");
-                    System.out.println("item: " + coffee.getName() + ", cost: " + coffee.getCost());
-                    input = "";
+                    if(menu.isAvailable(cafeAmericano)){
+                        inventory.decreaseIngredientUnitsByDrink(cafeAmericano);
+                        dispensing(cafeAmericano);
+                        break;
+                    }
+                    else outOfStock(cafeAmericano);
                     break;
                 case "2":
-                    System.out.println("Dispensing Decaf Coffee");
-                    input = "";
+                    if(menu.isAvailable(cafeLatte)){
+                        inventory.decreaseIngredientUnitsByDrink(cafeLatte);
+                        dispensing(cafeLatte);
+                        break;
+                    }
+                    else outOfStock(cafeLatte);
                     break;
                 case "3":
-                    System.out.println("Dispensing Cafe latte");
-                    input = "";
+                    if(menu.isAvailable(cafeMocha)){
+                        inventory.decreaseIngredientUnitsByDrink(cafeMocha);
+                        dispensing(cafeMocha);
+                        break;
+                    }
+                    else outOfStock(cafeMocha);
                     break;
                 case "4":
-                    System.out.println("Dispensing Cafe Americano");
-                    input = "";
+                    if(menu.isAvailable(cappuccino)){
+                        inventory.decreaseIngredientUnitsByDrink(cappuccino);
+                        dispensing(cappuccino);
+                        break;
+                    }
+                    else outOfStock(cappuccino);
                     break;
                 case "5":
-                    System.out.println("Dispensing Cafe Mocha");
-                    input = "";
+                    if(menu.isAvailable(coffee)){
+                        inventory.decreaseIngredientUnitsByDrink(coffee);
+                        dispensing(coffee);
+                        break;
+                    }
+                    else outOfStock(coffee);
                     break;
                 case "6":
-                    System.out.println("Dispensing Cappuccino");
-                    input = "";
+                    if(menu.isAvailable(decafCoffee)){
+                        inventory.decreaseIngredientUnitsByDrink(decafCoffee);
+                        dispensing(decafCoffee);
+                        break;
+                    }
+                    else outOfStock(decafCoffee);
                     break;
                 default:
                     System.out.println("Invalid selection: " + input);
-                    input = "";
                     break;
             }
         }
+    }
+
+    public static void dispensing(Drink drink){
+        System.out.println("Dispensing: " + drink.getName());
+    }
+
+    public static void outOfStock(Drink drink){
+        System.out.println("Out of stock: " + drink.getName());
     }
 }
