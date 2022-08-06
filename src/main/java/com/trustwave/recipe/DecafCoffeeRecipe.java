@@ -1,6 +1,9 @@
 package com.trustwave.recipe;
 
+import com.trustwave.ingredient.CreamIngredient;
+import com.trustwave.ingredient.DecafCoffeeIngredient;
 import com.trustwave.ingredient.Ingredient;
+import com.trustwave.ingredient.SugarIngredient;
 
 public class DecafCoffeeRecipe extends Recipe {
     private Ingredient decafCoffee;
@@ -9,9 +12,9 @@ public class DecafCoffeeRecipe extends Recipe {
 
     public DecafCoffeeRecipe(){
         super.setName("Decaf Coffee Recipe");
-        this.decafCoffee = new Ingredient("Decaf Coffee", 0.75);
-        this.sugar = new Ingredient("Sugar", 0.25);
-        this.cream = new Ingredient("Cream", 0.25);
+        this.decafCoffee = new DecafCoffeeIngredient();
+        this.sugar = new SugarIngredient();
+        this.cream = new CreamIngredient();
         setRecipe();
     }
 

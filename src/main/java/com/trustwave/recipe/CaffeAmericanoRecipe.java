@@ -1,5 +1,6 @@
 package com.trustwave.recipe;
 
+import com.trustwave.ingredient.EspressoIngredient;
 import com.trustwave.ingredient.Ingredient;
 
 public class CaffeAmericanoRecipe extends Recipe {
@@ -7,7 +8,7 @@ public class CaffeAmericanoRecipe extends Recipe {
 
     public CaffeAmericanoRecipe(){
         super.setName("Caffe Americano Recipe");
-        this.espresso = new Ingredient("Espresso", 1.10);
+        this.espresso = new EspressoIngredient();
         setRecipe();
     }
 

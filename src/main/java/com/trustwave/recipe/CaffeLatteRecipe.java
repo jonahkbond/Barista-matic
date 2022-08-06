@@ -1,6 +1,8 @@
 package com.trustwave.recipe;
 
+import com.trustwave.ingredient.EspressoIngredient;
 import com.trustwave.ingredient.Ingredient;
+import com.trustwave.ingredient.SteamedMilkIngredient;
 
 public class CaffeLatteRecipe extends Recipe {
     private Ingredient espresso;
@@ -8,8 +10,8 @@ public class CaffeLatteRecipe extends Recipe {
 
     public CaffeLatteRecipe(){
         super.setName("Caffe Latte Recipe");
-        this.espresso = new Ingredient("Espresso", 1.10);
-        this.steamedMilk = new Ingredient("Steamed Milk", 0.35);
+        this.espresso = new EspressoIngredient();
+        this.steamedMilk = new SteamedMilkIngredient();
         setRecipe();
     }
 

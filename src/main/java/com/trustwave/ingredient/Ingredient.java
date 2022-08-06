@@ -1,13 +1,8 @@
 package com.trustwave.ingredient;
 
-public class Ingredient {
+public abstract class Ingredient {
     private String name;
     private double cost;
-
-    public Ingredient(String name, double cost){
-        this.name = name;
-        this.cost = cost;
-    }
 
     public void setName(String name){
         this.name = name;

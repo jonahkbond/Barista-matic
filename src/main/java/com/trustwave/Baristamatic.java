@@ -1,7 +1,7 @@
 package com.trustwave;
 
 import com.trustwave.drink.*;
-import com.trustwave.ingredient.Ingredient;
+import com.trustwave.ingredient.*;
 import com.trustwave.inventory.Inventory;
 import com.trustwave.menu.Menu;
 import com.trustwave.recipe.*;
@@ -15,20 +15,20 @@ public class Baristamatic {
         String input = "";
 
         //Create Ingredients
-        Ingredient coffeeIngredent = new Ingredient("Coffee", 0.75);
-        Ingredient decafCoffeeIngredent = new Ingredient("Decaf Coffee", 0.75);
-        Ingredient sugarIngredient = new Ingredient("Sugar", 0.25);
-        Ingredient creamIngredient = new Ingredient("Cream", 0.25);
-        Ingredient steamedMilkIngredient = new Ingredient("Steamed Milk", 0.35);
-        Ingredient foamedMilkIngredient = new Ingredient("Foamed Milk", 0.35);
-        Ingredient espressoIngredient = new Ingredient("Espresso", 1.10);
-        Ingredient cocoaIngredient = new Ingredient("Cocoa", 0.90);
-        Ingredient whippedCreamIngredient = new Ingredient("Whipped Cream", 1.00);
+        Ingredient coffeeIngredient = new CoffeeIngredient();
+        Ingredient decafCoffeeIngredient = new DecafCoffeeIngredient();
+        Ingredient sugarIngredient = new SugarIngredient();
+        Ingredient creamIngredient = new CreamIngredient();
+        Ingredient steamedMilkIngredient = new SteamedMilkIngredient();
+        Ingredient foamedMilkIngredient = new FoamedMilkIngredient();
+        Ingredient espressoIngredient = new EspressoIngredient();
+        Ingredient cocoaIngredient = new CocoaIngredient();
+        Ingredient whippedCreamIngredient = new WhippedCreamIngredient();
 
         //Create ingredients map and add Ingredients
         Map<String, Ingredient> ingredientsMap = new HashMap<>();
-        ingredientsMap.put(coffeeIngredent.getName(), coffeeIngredent);
-        ingredientsMap.put(decafCoffeeIngredent.getName(), decafCoffeeIngredent);
+        ingredientsMap.put(coffeeIngredient.getName(), coffeeIngredient);
+        ingredientsMap.put(decafCoffeeIngredient.getName(), decafCoffeeIngredient);
         ingredientsMap.put(sugarIngredient.getName(), sugarIngredient);
         ingredientsMap.put(creamIngredient.getName(), creamIngredient);
         ingredientsMap.put(steamedMilkIngredient.getName(), steamedMilkIngredient);
