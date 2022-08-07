@@ -26,6 +26,18 @@ public class Menu {
         return available;
     }
 
+    public void dispensing(Drink drink){
+        System.out.println("Dispensing: " + drink.getName());
+    }
+
+    public void outOfStock(Drink drink){
+        System.out.println("Out of stock: " + drink.getName());
+    }
+
+    public void invalidSelection(String input){
+        System.out.println("Invalid selection: " + input);
+    }
+
     public void display(){
         System.out.println("Menu:");
         for (Map.Entry<Integer, Drink> entry : drinkMap.entrySet()){

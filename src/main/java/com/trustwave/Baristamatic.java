@@ -4,7 +4,6 @@ import com.trustwave.drink.*;
 import com.trustwave.ingredient.*;
 import com.trustwave.inventory.Inventory;
 import com.trustwave.menu.Menu;
-import com.trustwave.recipe.*;
 import java.io.*;
 import java.util.*;
 
@@ -37,14 +36,6 @@ public class Baristamatic {
         ingredientsMap.put(cocoaIngredient.getName(), cocoaIngredient);
         ingredientsMap.put(whippedCreamIngredient.getName(), whippedCreamIngredient);
 
-        //Create Recipes
-        CoffeeRecipe coffeeRecipe = new CoffeeRecipe();
-        DecafCoffeeRecipe decafCoffeeRecipe = new DecafCoffeeRecipe();
-        CaffeLatteRecipe caffeLatteRecipe = new CaffeLatteRecipe();
-        CaffeAmericanoRecipe caffeAmericanoRecipe = new CaffeAmericanoRecipe();
-        CaffeMochaRecipe caffeMochaRecipe = new CaffeMochaRecipe();
-        CappuccinoRecipe cappuccinoRecipe = new CappuccinoRecipe();
-
         //Create Drinks
         CoffeeDrink coffee = new CoffeeDrink(ingredientsMap);
         DecafCoffeeDrink decafCoffee = new DecafCoffeeDrink(ingredientsMap);
@@ -72,9 +63,6 @@ public class Baristamatic {
         //Create menu
         Menu menu = new Menu(drinkMap,inventory);
 
-        //Create DrinkManager
-        DrinkManager drinkManger = new DrinkManager();
-
         while(quit!=true){
             inventory.display();
             menu.display();
@@ -100,53 +88,53 @@ public class Baristamatic {
                 case "1":
                     if(menu.isAvailable(caffeAmericano)){
                         inventory.decreaseIngredientUnitsByDrink(caffeAmericano);
-                        drinkManger.dispensing(caffeAmericano);
+                        menu.dispensing(caffeAmericano);
                         break;
                     }
-                    else drinkManger.outOfStock(caffeAmericano);
+                    else menu.outOfStock(caffeAmericano);
                     break;
                 case "2":
                     if(menu.isAvailable(caffeLatte)){
                         inventory.decreaseIngredientUnitsByDrink(caffeLatte);
-                        drinkManger.dispensing(caffeLatte);
+                        menu.dispensing(caffeLatte);
                         break;
                     }
-                    else drinkManger.outOfStock(caffeLatte);
+                    else menu.outOfStock(caffeLatte);
                     break;
                 case "3":
                     if(menu.isAvailable(caffeMocha)){
                         inventory.decreaseIngredientUnitsByDrink(caffeMocha);
-                        drinkManger.dispensing(caffeMocha);
+                        menu.dispensing(caffeMocha);
                         break;
                     }
-                    else drinkManger.outOfStock(caffeMocha);
+                    else menu.outOfStock(caffeMocha);
                     break;
                 case "4":
                     if(menu.isAvailable(cappuccino)){
                         inventory.decreaseIngredientUnitsByDrink(cappuccino);
-                        drinkManger.dispensing(cappuccino);
+                        menu.dispensing(cappuccino);
                         break;
                     }
-                    else drinkManger.outOfStock(cappuccino);
+                    else menu.outOfStock(cappuccino);
                     break;
                 case "5":
                     if(menu.isAvailable(coffee)){
                         inventory.decreaseIngredientUnitsByDrink(coffee);
-                        drinkManger.dispensing(coffee);
+                        menu.dispensing(coffee);
                         break;
                     }
-                    else drinkManger.outOfStock(coffee);
+                    else menu.outOfStock(coffee);
                     break;
                 case "6":
                     if(menu.isAvailable(decafCoffee)){
                         inventory.decreaseIngredientUnitsByDrink(decafCoffee);
-                        drinkManger.dispensing(decafCoffee);
+                        menu.dispensing(decafCoffee);
                         break;
                     }
-                    else drinkManger.outOfStock(decafCoffee);
+                    else menu.outOfStock(decafCoffee);
                     break;
                 default:
-                    System.out.println("Invalid selection: " + input);
+                    menu.invalidSelection(input);
                     break;
             }
         }
