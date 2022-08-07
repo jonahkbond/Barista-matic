@@ -8,6 +8,7 @@ import java.util.Map;
 public abstract class Recipe {
     private String name;
     private Map<String, Integer> recipe;
+    private Map<String, Ingredient> ingredients;
 
     public Recipe(){
         recipe = new HashMap<>();

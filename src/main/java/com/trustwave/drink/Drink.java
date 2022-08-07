@@ -3,17 +3,14 @@ package com.trustwave.drink;
 import com.trustwave.ingredient.Ingredient;
 import java.util.Map;
 
-public class Drink {
+public abstract class Drink {
     private String name;
     private Map<String, Ingredient> ingredients;
     private Map<String, Integer> recipe;
     private double cost;
 
-    public Drink(String name, Map<String, Ingredient> ingredients, Map<String, Integer> recipe){
-        this.name = name;
+    public Drink(Map<String, Ingredient> ingredients){
         this.ingredients = ingredients;
-        this.recipe = recipe;
-        this.cost = calculateCost(ingredients, recipe);
     }
 
     public String getName(){
@@ -42,6 +39,10 @@ public class Drink {
 
     public double getCost(){
         return this.cost;
+    }
+
+    public void setCost(double cost){
+        this.cost = cost;
     }
 
     public double calculateCost(Map<String, Ingredient> ingredients, Map<String, Integer> recipe) {

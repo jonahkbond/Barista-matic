@@ -46,12 +46,12 @@ public class Baristamatic {
         CappuccinoRecipe cappuccinoRecipe = new CappuccinoRecipe();
 
         //Create Drinks
-        Drink coffee = new Drink("Coffee", ingredientsMap, coffeeRecipe.getRecipe());
-        Drink decafCoffee = new Drink("Decaf Coffee", ingredientsMap, decafCoffeeRecipe.getRecipe());
-        Drink caffeLatte = new Drink("Caffe Latte", ingredientsMap, caffeLatteRecipe.getRecipe());
-        Drink caffeAmericano = new Drink("Caffe Americano", ingredientsMap, caffeAmericanoRecipe.getRecipe());
-        Drink caffeMocha = new Drink("Caffe Mocha", ingredientsMap, caffeMochaRecipe.getRecipe());
-        Drink cappuccino = new Drink("Cappuccino", ingredientsMap, cappuccinoRecipe.getRecipe());
+        CoffeeDrink coffee = new CoffeeDrink(ingredientsMap);
+        DecafCoffeeDrink decafCoffee = new DecafCoffeeDrink(ingredientsMap);
+        CaffeLatteDrink caffeLatte = new CaffeLatteDrink(ingredientsMap);
+        CaffeAmericanoDrink caffeAmericano = new CaffeAmericanoDrink(ingredientsMap);
+        CaffeMochaDrink caffeMocha = new CaffeMochaDrink(ingredientsMap);
+        CappuccinoDrink cappuccino = new CappuccinoDrink(ingredientsMap);
 
         //Create Inventory
         Map<String, Integer> stockMap = new TreeMap<>();
