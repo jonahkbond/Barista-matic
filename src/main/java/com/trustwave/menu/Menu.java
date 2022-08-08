@@ -41,8 +41,8 @@ public class Menu {
     public void display(){
         System.out.println("Menu:");
         for (Map.Entry<Integer, Drink> entry : drinkMap.entrySet()){
-            System.out.println( entry.getKey() + ", " + entry.getValue().getName() + ", $" +
-                    format("%.2f", entry.getValue().getCost()) + ", " + isAvailable(entry.getValue()));
+            System.out.println( entry.getKey() + "," + entry.getValue().getName() + ",$" +
+                    format("%.2f", entry.getValue().getCost()) + "," + isAvailable(entry.getValue()));
         }
     }
 }

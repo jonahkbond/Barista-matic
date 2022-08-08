@@ -42,7 +42,7 @@ public class Inventory {
     public void display(){
         System.out.println("Inventory:");
         for (Map.Entry<String, Integer> entry : this.inventoryMap.entrySet()) {
-            System.out.println(entry.getKey() + ", " + entry.getValue());
+            System.out.println(entry.getKey() + "," + entry.getValue());
         }
     }
 }

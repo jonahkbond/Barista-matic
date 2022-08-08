@@ -143,16 +143,15 @@ public class InventoryTest {
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
         String expectedOutput = "Inventory:\r\n" +
-                "Cocoa, 10\r\n" +
-                "Coffee, 10\r\n" +
-                "Cream, 10\r\n" +
-                "Decaf Coffee, 10\r\n" +
-                "Espresso, 10\r\n" +
-                "Foamed Milk, 10\r\n" +
-                "Steamed Milk, 10\r\n" +
-                "Sugar, 10\r\n" +
-                "Whipped Cream, 10\r\n";
-
+                "Cocoa,10\r\n" +
+                "Coffee,10\r\n" +
+                "Cream,10\r\n" +
+                "Decaf Coffee,10\r\n" +
+                "Espresso,10\r\n" +
+                "Foamed Milk,10\r\n" +
+                "Steamed Milk,10\r\n" +
+                "Sugar,10\r\n" +
+                "Whipped Cream,10\r\n";
 
         inventory.display();
 

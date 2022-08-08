@@ -116,14 +116,13 @@ public class MenuTest {
             if(entry.getKey()=="Espresso"){
                 stockMap.put(entry.getKey(), 2);
             }
-            else
-            stockMap.put(entry.getKey(), 10);
+            else stockMap.put(entry.getKey(), 10);
         }
 
         inventory = new Inventory(stockMap);
         menu = new Menu(drinkMap,inventory);
 
-        Assert.assertEquals(false, menu.isAvailable(caffeAmericano));
+        Assert.assertFalse(menu.isAvailable(caffeAmericano));
     }
 
     @Test
@@ -165,12 +164,12 @@ public class MenuTest {
         menu.display();
 
         String expectedOutput = "Menu:\r\n" +
-                "1, Caffe Americano, $3.30, true\r\n" +
-                "2, Caffe Latte, $2.55, true\r\n" +
-                "3, Caffe Mocha, $3.35, true\r\n" +
-                "4, Cappuccino, $2.90, true\r\n" +
-                "5, Coffee, $2.75, true\r\n" +
-                "6, Decaf Coffee, $2.75, true\r\n";
+                "1,Caffe Americano,$3.30,true\r\n" +
+                "2,Caffe Latte,$2.55,true\r\n" +
+                "3,Caffe Mocha,$3.35,true\r\n" +
+                "4,Cappuccino,$2.90,true\r\n" +
+                "5,Coffee,$2.75,true\r\n" +
+                "6,Decaf Coffee,$2.75,true\r\n";
 
         Assert.assertEquals(expectedOutput, outContent.toString());
     }
